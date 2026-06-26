@@ -69,8 +69,6 @@ add_library(${PROJECT_NAME} SHARED
 
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /W4)
-else()
-    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wno-dollar-in-identifier-extension)
 endif()
 target_include_directories(${PROJECT_NAME} PRIVATE src include)
 
@@ -111,3 +109,7 @@ target_link_libraries(${PROJECT_NAME} libslc)
 target_compile_options(GeodeBindings PRIVATE -Wno-overloaded-virtual -Wno-unused-variable)
 
 setup_geode_mod(${PROJECT_NAME})
+
+if(NOT MSVC)
+    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wno-dollar-in-identifier-extension)
+endif()
