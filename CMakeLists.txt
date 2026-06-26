@@ -111,5 +111,12 @@ target_compile_options(GeodeBindings PRIVATE -Wno-overloaded-virtual -Wno-unused
 setup_geode_mod(${PROJECT_NAME})
 
 if(NOT MSVC)
-    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wno-dollar-in-identifier-extension)
+    # Create an interface library to ensure our warning suppressions
+    # are appended *after* Geode's interface compile options (like -Wpedantic and -Werror)
+    add_library(silicate_warning_suppressions INTERFACE)
+    target_compile_options(silicate_warning_suppressions INTERFACE 
+        -Wno-dollar-in-identifier-extension 
+        -Wno-error=dollar-in-identifier-extension
+    )
+    target_link_libraries(${PROJECT_NAME} silicate_warning_suppressions)
 endif()
