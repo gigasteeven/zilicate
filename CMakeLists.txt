@@ -71,6 +71,8 @@ target_include_directories(${PROJECT_NAME} PRIVATE src include)
 # Add fallback include for Subtick-Inputs-API if it's placed alongside silicate
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../Subtick-Inputs-API-master/include")
     target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../Subtick-Inputs-API-master/include")
+elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Subtick-Inputs-API-master/include")
+    target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Subtick-Inputs-API-master/include")
 endif()
 
 if (NOT DEFINED ENV{GEODE_SDK})
