@@ -79,6 +79,10 @@ elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/Subtick-Inputs-API-master/include")
     target_include_directories(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Subtick-Inputs-API-master/include")
 endif()
 
+if (TARGET chizz.subtick-inputs-api)
+    target_link_libraries(${PROJECT_NAME} chizz.subtick-inputs-api)
+endif()
+
 if (NOT DEFINED ENV{GEODE_SDK})
     message(FATAL_ERROR "Unable to find Geode SDK! Please define GEODE_SDK environment variable to point to Geode")
 else()
